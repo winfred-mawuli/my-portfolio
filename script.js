@@ -3,9 +3,9 @@ const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('nav-menu');
 const navbar = document.getElementById('navbar');
 const navLinks = document.querySelectorAll('.nav-link');
-const skillBars = document.querySelectorAll('.skill-progress');
 const timelineItems = document.querySelectorAll('.timeline-item');
 const stats = document.querySelectorAll('.stat-number');
+const techItems = document.querySelectorAll('.tech-item');
 
 // Mobile Navigation Toggle
 hamburger.addEventListener('click', () => {
@@ -59,16 +59,16 @@ const observerOptions = {
     rootMargin: '0px 0px -50px 0px'
 };
 
-// Animate skill bars when they come into view
-const skillObserver = new IntersectionObserver((entries) => {
+// Animate tech items when they come into view
+const techObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const skillBars = entry.target.querySelectorAll('.skill-progress');
-            skillBars.forEach(bar => {
-                const width = bar.getAttribute('data-width');
+            const techItems = entry.target.querySelectorAll('.tech-item');
+            techItems.forEach((item, index) => {
                 setTimeout(() => {
-                    bar.style.width = width + '%';
-                }, 200);
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
             });
         }
     });
@@ -77,7 +77,7 @@ const skillObserver = new IntersectionObserver((entries) => {
 // Observe skills section
 const skillsSection = document.querySelector('.skills');
 if (skillsSection) {
-    skillObserver.observe(skillsSection);
+    techObserver.observe(skillsSection);
 }
 
 // Animate timeline items
@@ -434,5 +434,16 @@ function debounce(func, wait) {
 
 // Apply debouncing to scroll handlers
 window.addEventListener('scroll', debounce(updateActiveNav, 10));
+
+// Tech stack hover effects
+techItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        item.style.transform = 'translateY(-5px) scale(1.05)';
+    });
+    
+    item.addEventListener('mouseleave', () => {
+        item.style.transform = 'translateY(0) scale(1)';
+    });
+});
 
 console.log('Portfolio website loaded successfully! 🚀');

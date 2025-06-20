@@ -476,39 +476,46 @@ section {
     text-align: center;
 }
 
-.skill-item {
-    margin-bottom: 1.5rem;
+/* Tech Stack Styles */
+.tech-stack {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
 }
 
-.skill-info {
+.tech-item {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.skill-name {
+.tech-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.tech-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.tech-item:hover .tech-icon {
+    transform: scale(1.1);
+}
+
+.tech-name {
+    font-size: 0.9rem;
     font-weight: 600;
     color: #333;
-}
-
-.skill-percentage {
-    font-weight: 600;
-    color: #2563eb;
-}
-
-.skill-bar {
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(135deg, #2563eb, #0891b2);
-    border-radius: 4px;
-    width: 0;
-    transition: width 1.5s ease-in-out;
+    text-align: center;
 }
 
 /* Experience Section */
@@ -1005,6 +1012,11 @@ section {
         grid-template-columns: 1fr;
     }
     
+    .tech-stack {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1rem;
+    }
+    
     .timeline {
         padding-left: 1rem;
     }
@@ -1065,6 +1077,19 @@ section {
         flex-direction: column;
         align-items: center;
     }
+    
+    .tech-stack {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tech-item {
+        padding: 0.8rem;
+    }
+    
+    .tech-icon {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* Accessibility */
@@ -1090,4 +1115,33 @@ input:focus,
 textarea:focus {
     outline: 2px solid #fbbf24;
     outline-offset: 2px;
+}
+
+/* Tech stack hover effects */
+.tech-item:hover {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+/* Loading animation for tech icons */
+.tech-icon {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.tech-item:nth-child(1) .tech-icon { animation-delay: 0.1s; }
+.tech-item:nth-child(2) .tech-icon { animation-delay: 0.2s; }
+.tech-item:nth-child(3) .tech-icon { animation-delay: 0.3s; }
+.tech-item:nth-child(4) .tech-icon { animation-delay: 0.4s; }
+.tech-item:nth-child(5) .tech-icon { animation-delay: 0.5s; }
+.tech-item:nth-child(6) .tech-icon { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
