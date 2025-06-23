@@ -47,7 +47,7 @@ A modern, interactive portfolio website showcasing the professional experience a
 - Led Assessment Platform development with microservice architecture
 - Mentored 4 junior developers in Java and Spring Boot
 
-### Backend Developer - National Service | AmaliTech Services (November 2022 - September 2023)
+### Backend Developer | AmaliTech Services (November 2022 - September 2023)
 - Event Management System with Node.js and TypeScript
 - Google Geo-location integration for location-based search
 - Firebase Cloud Messaging for real-time notifications
