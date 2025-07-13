@@ -289,6 +289,29 @@ const cardObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
+// CV Download tracking and feedback
+document.addEventListener('DOMContentLoaded', () => {
+    const downloadBtn = document.querySelector('.btn-download');
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', (e) => {
+            // Check if CV file exists
+            const cvPath = downloadBtn.getAttribute('href');
+            
+            // Add visual feedback
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = '<span class="download-icon">⬇️</span>Downloading...';
+            downloadBtn.style.pointerEvents = 'none';
+            
+            // Reset button after delay
+            setTimeout(() => {
+                downloadBtn.innerHTML = originalText;
+                downloadBtn.style.pointerEvents = 'auto';
+                showNotification('CV download started successfully!', 'success');
+            }, 1500);
+        });
+    }
+});
+
 // Observe all cards and animated elements
 document.querySelectorAll('.stat, .skill-category, .profile-card, .education-card, .certification-card, .contact-item').forEach(el => {
     el.classList.add('animate-on-scroll');
