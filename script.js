@@ -295,6 +295,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (downloadBtn) {
         downloadBtn.addEventListener('click', (e) => {
             // Check if CV file exists
+        }
+        )
+    }
+}
+)
 // Add CSS for scroll animations
 const style = document.createElement('style');
 style.textContent = `
