@@ -345,10 +345,10 @@ function App() {
                 A cloud-based system for evaluating candidate performance with detailed analytics.
               </p>
               <ul className="space-y-2 text-sm text-gray-600 mb-6">
-                <li>• Java and Spring Boot with microservices architecture</li>
-                <li>• Kafka for event streaming, Redis for caching</li>
-                <li>• DynamoDB for fast-access data storage</li>
-                <li>• Real-time analytics and performance scoring</li>
+                <li>• Developed the backend using Java and Spring Boot with a microservices architecture</li>
+                <li>• Integrated Kafka for event streaming, Redis for caching, and DynamoDB for fast-access data storage</li>
+                <li>• Implemented a performance scoring engine to support real-time analytics</li>
+                <li>• Designed scalable modules for candidate tracking, assessment history, and feedback</li>
               </ul>
               <div className="flex flex-wrap gap-2">
                 <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Java</span>
@@ -368,10 +368,10 @@ function App() {
                 A CMS integration built with Apex and Salesforce APIs to improve enterprise workflow efficiency.
               </p>
               <ul className="space-y-2 text-sm text-gray-600 mb-6">
-                <li>• Custom Apex REST classes for secure data exchange</li>
-                <li>• Triggers and flows for real-time record sync</li>
-                <li>• Optimized SOQL queries and platform caching</li>
-                <li>• 90%+ test coverage with comprehensive test classes</li>
+                <li>• Created custom Apex REST classes to handle secure CMS-to-Salesforce data exchange</li>
+                <li>• Used triggers and flows to sync records and automate Salesforce objects in real time</li>
+                <li>• Reduced API processing time by optimizing SOQL queries and leveraging platform caching</li>
+                <li>• Improved maintainability by implementing test classes and achieving over 90% test coverage</li>
               </ul>
               <div className="flex flex-wrap gap-2">
                 <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Apex</span>
@@ -390,10 +390,9 @@ function App() {
                 A platform for discovering and promoting events with real-time location updates.
               </p>
               <ul className="space-y-2 text-sm text-gray-600 mb-6">
-                <li>• RESTful APIs using Node.js and TypeScript</li>
-                <li>• Google Maps API for location-based search</li>
-                <li>• Firebase Cloud Messaging for push notifications</li>
-                <li>• Real-time event updates and user interactions</li>
+                <li>• Built RESTful APIs using Node.js and TypeScript to manage events, users, and interactions</li>
+                <li>• Integrated Google Maps API to support search-by-location functionality</li>
+                <li>• Implemented Firebase Cloud Messaging (FCM) to enable push notifications for live event updates</li>
               </ul>
               <div className="flex flex-wrap gap-2">
                 <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Node.js</span>

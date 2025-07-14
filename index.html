@@ -4,9 +4,822 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Winfred Mawuli Agbotey - Backend Developer & Salesforce Administrator</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .nav-logo .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .title-line {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .title-name {
+            display: block;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-role {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-circle {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .card-1 {
+            top: 20%;
+            left: 10%;
+        }
+
+        .card-2 {
+            top: 30%;
+            right: 5%;
+        }
+
+        .card-3 {
+            bottom: 30%;
+            left: 5%;
+        }
+
+        .card-4 {
+            bottom: 20%;
+            right: 15%;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8fafc;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: white;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: #555;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: #f8fafc;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 80px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 18px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-period {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-achievements li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .timeline-achievements li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .current-badge {
+            background: #22c55e;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.3rem;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .project-features li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .tag-java { background: #e3f2fd; color: #1976d2; }
+        .tag-spring { background: #e8f5e8; color: #388e3c; }
+        .tag-node { background: #f3e5f5; color: #7b1fa2; }
+        .tag-salesforce { background: #fff3e0; color: #f57c00; }
+
+        /* Education Section */
+        .education {
+            background: #f8fafc;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .education-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .education-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-field {
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-year {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #2563eb, #0891b2);
+            color: white;
+        }
+
+        .contact .section-title {
+            color: white;
+            background: none;
+            -webkit-text-fill-color: white;
+        }
+
+        .contact .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: #fbbf24;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 1rem 0;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.8rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                padding-left: 1rem;
+            }
+            
+            .timeline::before {
+                left: 15px;
+            }
+            
+            .timeline-marker {
+                left: 3px;
+            }
+            
+            .timeline-item {
+                padding-left: 50px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .title-role {
+                font-size: 1.4rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .hero-visual {
+                height: 300px;
+            }
+            
+            .floating-card {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -29,7 +842,7 @@
                     <a href="#experience" class="nav-link">Experience</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#education" class="nav-link">Education</a>
+                    <a href="#projects" class="nav-link">Projects</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">Contact</a>
@@ -51,11 +864,12 @@
                     <h1 class="hero-title">
                         <span class="title-line">Hi, I'm</span>
                         <span class="title-name">Winfred Mawuli Agbotey</span>
-                        <span class="title-role">Backend Developer & Salesforce Administrator</span>
+                        <span class="title-role">Backend Engineer & Salesforce Administrator</span>
                     </h1>
                     <p class="hero-description">
-                        Passionate backend developer with 3+ years of experience building scalable, 
-                        performant systems using Java, Node.js, and Salesforce technologies.
+                        Backend Engineer with 3+ years of experience specializing in designing and building scalable, 
+                        performant, and maintainable backend systems. Currently serving as an Instructor & Backend Engineer, 
+                        mentoring the next generation of developers while building enterprise solutions.
                     </p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">Get In Touch</a>
@@ -83,9 +897,6 @@
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
     </section>
 
     <!-- About Section -->
@@ -98,7 +909,7 @@
             <div class="about-content">
                 <div class="about-text">
                     <p class="about-description">
-                        Backend Developer with 3+ years of experience specializing in designing and building 
+                        Backend Engineer with 3+ years of experience specializing in designing and building 
                         scalable, performant, and maintainable backend systems. Proficient in Java (Spring Boot), 
                         Node.js, and TypeScript, with hands-on expertise in microservices, cloud-native development, 
                         and backend architecture.
@@ -114,34 +925,16 @@
                             <span class="stat-label">Years Experience</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Projects Completed</span>
+                            <span class="stat-number">11</span>
+                            <span class="stat-label">Trainees Mentored</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">2</span>
-                            <span class="stat-label">Certifications</span>
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Code Reviews</span>
                         </div>
                         <div class="stat">
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">People Mentored</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="profile-card">
-                        <div class="profile-image">
-                            <div class="profile-placeholder">
-                                <span>WA</span>
-                            </div>
-                        </div>
-                        <div class="profile-info">
-                            <h3>Winfred Agbotey</h3>
-                            <p>Backend Developer</p>
-                            <div class="profile-badges">
-                                <span class="badge">Java Expert</span>
-                                <span class="badge">Salesforce Admin</span>
-                                <span class="badge">Team Lead</span>
-                            </div>
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Completion Rate</span>
                         </div>
                     </div>
                 </div>
@@ -159,94 +952,77 @@
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3 class="category-title">Languages</h3>
-                    <div class="tech-stack">
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="tech-icon">
-                            <span class="tech-name">Java</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" class="tech-icon">
-                            <span class="tech-name">TypeScript</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="tech-icon">
-                            <span class="tech-name">JavaScript</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/salesforce/salesforce-original.svg" alt="Apex" class="tech-icon">
-                            <span class="tech-name">Apex</span>
-                        </div>
-                    </div>
+                    <ul class="skill-list">
+                        <li>Java</li>
+                        <li>Apex</li>
+                        <li>TypeScript</li>
+                        <li>JavaScript</li>
+                    </ul>
                 </div>
 
                 <div class="skill-category">
                     <h3 class="category-title">Frameworks</h3>
-                    <div class="tech-stack">
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" class="tech-icon">
-                            <span class="tech-name">Spring Boot</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="tech-icon">
-                            <span class="tech-name">Node.js</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" class="tech-icon">
-                            <span class="tech-name">Express</span>
-                        </div>
-                    </div>
+                    <ul class="skill-list">
+                        <li>Spring Boot</li>
+                        <li>Node.js/Express</li>
+                    </ul>
                 </div>
 
                 <div class="skill-category">
                     <h3 class="category-title">Databases</h3>
-                    <div class="tech-stack">
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="tech-icon">
-                            <span class="tech-name">PostgreSQL</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" class="tech-icon">
-                            <span class="tech-name">MongoDB</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="tech-icon">
-                            <span class="tech-name">MySQL</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="DynamoDB" class="tech-icon">
-                            <span class="tech-name">DynamoDB</span>
-                        </div>
-                    </div>
+                    <ul class="skill-list">
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                        <li>MongoDB</li>
+                        <li>AWS DynamoDB</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">Testing</h3>
+                    <ul class="skill-list">
+                        <li>JUnit</li>
+                        <li>JMeter</li>
+                        <li>Mocha/Chai</li>
+                        <li>Supertest</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">Version Control</h3>
+                    <ul class="skill-list">
+                        <li>Git</li>
+                        <li>GitHub</li>
+                        <li>GitLab</li>
+                    </ul>
                 </div>
 
                 <div class="skill-category">
                     <h3 class="category-title">Tools & Platforms</h3>
-                    <div class="tech-stack">
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="tech-icon">
-                            <span class="tech-name">Docker</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="tech-icon">
-                            <span class="tech-name">Kubernetes</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/salesforce/salesforce-original.svg" alt="Salesforce" class="tech-icon">
-                            <span class="tech-name">Salesforce</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" class="tech-icon">
-                            <span class="tech-name">Jenkins</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="tech-icon">
-                            <span class="tech-name">Git</span>
-                        </div>
-                        <div class="tech-item">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" class="tech-icon">
-                            <span class="tech-name">AWS</span>
-                        </div>
-                    </div>
+                    <ul class="skill-list">
+                        <li>Docker</li>
+                        <li>Jenkins</li>
+                        <li>Kubernetes</li>
+                        <li>Salesforce (Admin & Dev)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">Project Management</h3>
+                    <ul class="skill-list">
+                        <li>Jira</li>
+                        <li>Trello</li>
+                        <li>Confluence</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3 class="category-title">Other Skills</h3>
+                    <ul class="skill-list">
+                        <li>Agile/Scrum</li>
+                        <li>Code Reviews</li>
+                        <li>Mentorship</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -263,44 +1039,32 @@
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <div class="timeline-period">June 2024 - Present</div>
-                        <h3 class="timeline-title">Associate Backend Developer</h3>
-                        <p class="timeline-company">AmaliTech Services</p>
+                        <div class="timeline-period">May 2025 - Present <span class="current-badge">Current</span></div>
+                        <h3 class="timeline-title">Instructor & Backend Engineer</h3>
+                        <p class="timeline-company">AmaliTech</p>
                         <ul class="timeline-achievements">
-                            <li>Contributed to high-quality Salesforce solutions using Apex to build web services for CMS integration</li>
-                            <li>Achieved significant performance improvements and enhanced scalability through efficient Apex utilization</li>
-                            <li>Integrated into local and foreign teams, actively participating in Scrum ceremonies</li>
-                            <li>Mentored two developers in Salesforce Administration and Development</li>
-                            <li>Researched Agile AI-Driven Development for continuous professional upskilling</li>
+                            <li>Managing and supporting 11 backend trainees through their learning journey, providing daily guidance, performance tracking, and one-on-one technical assistance</li>
+                            <li>Delivering structured backend engineering lectures covering Java, Spring Boot, REST APIs, Git, testing, and development best practices</li>
+                            <li>Designed and assessed 6+ real-world project-based tasks, simulating industry development environments</li>
+                            <li>Mentored 5 high-potential trainees, achieving a 100% completion rate in core backend modules and personal code deliverables</li>
+                            <li>Facilitated weekly firechat sessions (12+ to date) on career growth, engineering culture, productivity tools, and industry standards</li>
+                            <li>Conducted over 50+ personalized code reviews and milestone evaluations, leading to a 40% improvement in code quality and best practice adherence</li>
                         </ul>
-                        <div class="project-highlight">
-                            <h4>Key Achievement</h4>
-                            <p>Successfully integrated Salesforce with CMS solutions, resulting in 40% performance improvement</p>
-                        </div>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <div class="timeline-period">October 2023 - June 2024</div>
-                        <h3 class="timeline-title">Backend Developer</h3>
-                        <p class="timeline-company">AmaliTech Services</p>
+                        <div class="timeline-period">October 2023 - Present</div>
+                        <h3 class="timeline-title">Backend & Salesforce Developer</h3>
+                        <p class="timeline-company">AmaliTech</p>
                         <ul class="timeline-achievements">
-                            <li>Developed high-quality backend solutions using Java, Node.js, and Spring Boot</li>
-                            <li>Led to significant performance improvements and enhanced scalability across two projects</li>
-                            <li>Collaborated with local teams, participating in Scrum ceremonies to drive project success</li>
-                            <li>Mentored four junior developers in Java and Spring Boot development</li>
+                            <li>Designed and implemented Salesforce Apex web services to integrate with a CMS, resulting in enhanced system interoperability</li>
+                            <li>Built backend features using Spring Boot and Node.js to support scalable APIs and service communication</li>
+                            <li>Developed custom objects, flows, and triggers to automate business logic in Salesforce</li>
+                            <li>Mentored five junior developers in both Java and Salesforce, accelerating team-wide learning and delivery</li>
                         </ul>
-                        <div class="project-highlight">
-                            <h4>Featured Project: Assessment Platform</h4>
-                            <p>A scalable platform designed to evaluate candidates through assessments, providing detailed performance metrics. Built using Java, Spring Boot, and integrated with Kafka, DynamoDB, and Redis.</p>
-                            <ul>
-                                <li>Led backend development using microservice architecture</li>
-                                <li>Integrated Kafka, DynamoDB, and Redis for enhanced performance</li>
-                                <li>Implemented user performance metrics and analytics</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 
@@ -308,22 +1072,77 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <div class="timeline-period">November 2022 - September 2023</div>
-                        <h3 class="timeline-title">Backend Developer</h3>
-                        <p class="timeline-company">AmaliTech Services</p>
+                        <h3 class="timeline-title">Backend Engineer</h3>
+                        <p class="timeline-company">AmaliTech</p>
                         <ul class="timeline-achievements">
-                            <li>Collaborated on event management system development using Node.js and TypeScript</li>
-                            <li>Developed APIs for event actions and location-based search using Google Geo-location</li>
-                            <li>Implemented real-time notifications via Firebase Cloud Messaging (FCM)</li>
+                            <li>Engineered event-based backend APIs using Node.js and TypeScript for a location-driven event platform</li>
+                            <li>Implemented location-aware search features with Google Geo-location API, increasing relevant event discovery by 40%</li>
+                            <li>Refactored legacy backend code and enhanced logging systems, reducing error rates by 30% and improving maintainability</li>
+                            <li>Collaborated with internal teams to resolve 40+ backend tickets, supporting smoother QA and frontend integration across sprints</li>
                         </ul>
-                        <div class="project-highlight">
-                            <h4>Featured Project: Event Management System</h4>
-                            <p>An event advertising app with APIs for event actions, location-based search, and real-time notifications.</p>
-                            <ul>
-                                <li>Built RESTful APIs for event management</li>
-                                <li>Implemented Google Geo-location for nearby event search</li>
-                                <li>Integrated Firebase Cloud Messaging for notifications</li>
-                            </ul>
-                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Selected Projects</h2>
+                <p class="section-subtitle">Key projects I've worked on</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">🏆</div>
+                    <h3 class="project-title">Assessment Platform</h3>
+                    <p class="project-description">A cloud-based system for evaluating candidate performance with detailed analytics.</p>
+                    <ul class="project-features">
+                        <li>Developed the backend using Java and Spring Boot with a microservices architecture</li>
+                        <li>Integrated Kafka for event streaming, Redis for caching, and DynamoDB for fast-access data storage</li>
+                        <li>Implemented a performance scoring engine to support real-time analytics</li>
+                        <li>Designed scalable modules for candidate tracking, assessment history, and feedback</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag tag-java">Java</span>
+                        <span class="tag tag-spring">Spring Boot</span>
+                        <span class="tag tag-java">Kafka</span>
+                        <span class="tag tag-spring">Redis</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">☁️</div>
+                    <h3 class="project-title">Salesforce Integration Service</h3>
+                    <p class="project-description">A CMS integration built with Apex and Salesforce APIs to improve enterprise workflow efficiency.</p>
+                    <ul class="project-features">
+                        <li>Created custom Apex REST classes to handle secure CMS-to-Salesforce data exchange</li>
+                        <li>Used triggers and flows to sync records and automate Salesforce objects in real time</li>
+                        <li>Reduced API processing time by optimizing SOQL queries and leveraging platform caching</li>
+                        <li>Improved maintainability by implementing test classes and achieving over 90% test coverage</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag tag-salesforce">Apex</span>
+                        <span class="tag tag-salesforce">Salesforce</span>
+                        <span class="tag tag-spring">REST API</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">📍</div>
+                    <h3 class="project-title">Event Management System</h3>
+                    <p class="project-description">A platform for discovering and promoting events with real-time location updates.</p>
+                    <ul class="project-features">
+                        <li>Built RESTful APIs using Node.js and TypeScript to manage events, users, and interactions</li>
+                        <li>Integrated Google Maps API to support search-by-location functionality</li>
+                        <li>Implemented Firebase Cloud Messaging (FCM) to enable push notifications for live event updates</li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag tag-node">Node.js</span>
+                        <span class="tag tag-node">TypeScript</span>
+                        <span class="tag tag-salesforce">Google Maps</span>
+                        <span class="tag tag-salesforce">Firebase</span>
                     </div>
                 </div>
             </div>
@@ -331,7 +1150,7 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="education">
+    <section class="education">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Education & Certifications</h2>
@@ -345,37 +1164,15 @@
                     <p class="education-institution">Takoradi Technical University, Ghana</p>
                     <p class="education-year">2022</p>
                 </div>
-                <div class="certification-card">
-                    <div class="certification-icon">🏆</div>
-                    <h3 class="certification-title">Certified Salesforce Administrator</h3>
-                    <p class="certification-description">Official Salesforce certification demonstrating expertise in administration and configuration</p>
+                <div class="education-card">
+                    <div class="education-icon">🏆</div>
+                    <h3 class="education-title">Certified Salesforce Administrator</h3>
+                    <p class="education-field">Official Salesforce certification demonstrating expertise in administration and configuration</p>
                 </div>
-                <div class="certification-card">
-                    <div class="certification-icon">💡</div>
-                    <h3 class="certification-title">Digital Innovation Programme</h3>
-                    <p class="certification-description">Advanced program focusing on digital transformation and innovation strategies</p>
-                </div>
-            </div>
-            
-            <div class="professional-development">
-                <h3 class="development-title">Professional Development & Contributions</h3>
-                <div class="development-items">
-                    <div class="development-item">
-                        <h4>Java Accelerator Program Participant</h4>
-                        <p>Served as Scrum Master and Team Lead in upskilling initiative</p>
-                    </div>
-                    <div class="development-item">
-                        <h4>Technical Assessment Interviewer</h4>
-                        <p>Conducted interviews for new Junior Associates and National Service Personnel</p>
-                    </div>
-                    <div class="development-item">
-                        <h4>Current Instructor Support for GTP Trainees</h4>
-                        <ul>
-                            <li>Delivering daily lessons and weekly reflection sessions</li>
-                            <li>Mentoring and guiding 5 trainees for backend readiness</li>
-                            <li>Monitoring attendance and evaluating lab work</li>
-                        </ul>
-                    </div>
+                <div class="education-card">
+                    <div class="education-icon">💡</div>
+                    <h3 class="education-title">Digital Innovation Programme</h3>
+                    <p class="education-field">Advanced program focusing on digital transformation and innovation strategies</p>
                 </div>
             </div>
         </div>
@@ -388,50 +1185,26 @@
                 <h2 class="section-title">Let's Connect</h2>
                 <p class="section-subtitle">Get in touch for opportunities and collaborations</p>
             </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div class="contact-details">
-                            <h4>Email</h4>
-                            <a href="mailto:winfredagbotey20@gmail.com">winfredagbotey20@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div class="contact-details">
-                            <h4>Phone</h4>
-                            <a href="tel:+233554704302">+233 554704302</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">💼</div>
-                        <div class="contact-details">
-                            <h4>LinkedIn</h4>
-                            <a href="https://linkedin.com/in/winfred-mawuli" target="_blank">linkedin.com/in/winfred-mawuli</a>
-                        </div>
-                    </div>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3 class="contact-title">Email</h3>
+                    <a href="mailto:winfredagbotey20@gmail.com" class="contact-link">winfredagbotey20@gmail.com</a>
                 </div>
-                <div class="contact-form">
-                    <form class="form">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" required>
-                            <label for="name">Your Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" required>
-                            <label for="email">Email Address</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" required>
-                            <label for="subject">Subject</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                            <label for="message">Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <h3 class="contact-title">Phone</h3>
+                    <a href="tel:+233554704302" class="contact-link">+233 554704302</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <h3 class="contact-title">LinkedIn</h3>
+                    <a href="https://linkedin.com/in/winfred-mawuli" target="_blank" class="contact-link">linkedin.com/in/winfred-mawuli</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <h3 class="contact-title">Website</h3>
+                    <a href="https://winfred-mawuli.github.io/my-portfolio/" target="_blank" class="contact-link">Portfolio Website</a>
                 </div>
             </div>
         </div>
@@ -442,10 +1215,79 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2025 Winfred Mawuli Agbotey. All rights reserved.</p>
-                <p>Backend Developer | Salesforce Administrator</p>
+                <p>Backend Engineer | Salesforce Administrator</p>
             </div>
         </div>
     </footer>
 
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Active navigation link based on scroll position
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section');
+            const scrollPosition = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70; // Account for navbar height
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        console.log('Portfolio website loaded successfully! 🚀');
+    </script>
 </body>
 </html>
